@@ -11,12 +11,14 @@ public class Level : MonoBehaviour
     public PlayerMovement player;
 
     [SerializeField] private Transform obstacleHolder;
+    [SerializeField] private Transform allowedHolder;
     [SerializeField] private Transform pushAbleHolder;
 
     private List<GameObject> obstacleList = new List<GameObject>();
+    [SerializeField] private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
-    private void Start()
+    private void Awake()
     {
         LoadList();
     }
@@ -43,6 +45,11 @@ public class Level : MonoBehaviour
         return obstacleList;
     }
 
+    public List<GameObject> AllowedObjList()
+    {
+        return allowedObjectsWhenSmall;
+    }
+
     public List<PushAbleGameObj> PushAbleGameObjList()
     {
         return pushAbleList;
@@ -65,8 +72,9 @@ public class Level : MonoBehaviour
     public void LoadList()
     {
         obstacleList.Clear();
+        allowedObjectsWhenSmall.Clear();
         pushAbleList.Clear();
-
+        
         for (int i = 0; i < obstacleHolder.childCount; i++)
         {
             GameObject obstacle = obstacleHolder.GetChild(i).gameObject;
@@ -76,13 +84,24 @@ public class Level : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < allowedHolder.childCount; i++)
+        {
+            GameObject allowedObj = allowedHolder.GetChild(i).gameObject;
+            if (allowedObj != null)
+            {
+                allowedObjectsWhenSmall.Add(allowedObj);
+            }
+        }
+        // In ra số lượng đối tượng trong danh sách để kiểm tra
+        Debug.Log("allowedObjectsWhenSmall count: " + allowedObjectsWhenSmall.Count);
+
         for (int i = 0; i < pushAbleHolder.childCount; i++)
         {
             PushAbleGameObj push = pushAbleHolder.GetChild(i).GetComponent<PushAbleGameObj>();
             if (push != null)
             {
                 pushAbleList.Add(push);
-            }    
+            }
         }
     }
 }

@@ -16,6 +16,18 @@ public class Cache
         return coral[collider];
     }
 
+    private static Dictionary<Collider2D, Star> star = new Dictionary<Collider2D, Star>();
+
+    public static Star GetStar(Collider2D collider)
+    {
+        if (!star.ContainsKey(collider))
+        {
+            star.Add(collider, collider.GetComponent<Star>());
+        }
+
+        return star[collider];
+    }
+
     private static Dictionary<Collider2D, PlayerMovement> player = new Dictionary<Collider2D, PlayerMovement>();
 
     public static PlayerMovement GetPlayerMovement(Collider2D collider)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Controller : MonoBehaviour
 {
-    public abstract void LoadObjList(List<GameObject> list, List<PushAbleGameObj> push);
+    public abstract void LoadObjList(List<GameObject> list, List<GameObject> allowedObjectsL, List<PushAbleGameObj> push);
 
     public abstract bool Move(Vector2 direction);
 

@@ -5,13 +5,14 @@ using UnityEngine;
 public class PushAbleGameObj : Controller
 {
     private List<GameObject> obstacleList = new List<GameObject>();
+    [SerializeField] private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
     private bool isFalling = false;
     private float fallDelay = 0.15f; // Thời gian giữa mỗi lần rơi
 
     void Start()
     {
-        LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
+        LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.AllowedObjList(), LevelManager.Ins.level.PushAbleGameObjList());
         StartCoroutine(FallLoop());
     }
 
@@ -66,7 +67,7 @@ public class PushAbleGameObj : Controller
         );
     }
 
-    public override void LoadObjList(List<GameObject> obstacleL, List<PushAbleGameObj> pushAbleL)
+    public override void LoadObjList(List<GameObject> obstacleL, List<GameObject> allowedObjectsL, List<PushAbleGameObj> pushAbleL)
     {
         obstacleList.Clear();
         pushAbleList.Clear();

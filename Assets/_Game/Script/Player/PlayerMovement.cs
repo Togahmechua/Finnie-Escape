@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : Controller
@@ -12,24 +13,25 @@ public class PlayerMovement : Controller
 
     [Header("-----List-----")]
     [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
+    [SerializeField] private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
     private bool isReadyToMove = true;
     private bool usePushAbleObjects;
     public int count;
 
-    private Coral localCoral;
+    [SerializeField] private Coral localCoral;
 
     void Start()
     {
-        LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.PushAbleGameObjList());
+        LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.AllowedObjList(), LevelManager.Ins.level.PushAbleGameObjList());
     }
 
     void Update()
     {
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveInput.Normalize();
-        
+
         Vector2 newMoveInput = moveInput * new Vector2(distancePerGrid, distancePerGrid);
 
         if (newMoveInput.sqrMagnitude > 0.5)
@@ -64,11 +66,13 @@ public class PlayerMovement : Controller
         isReadyToMove = true;
     }
 
-    public override void LoadObjList(List<GameObject> obstacleL, List<PushAbleGameObj> pushAbleL)
+    public override void LoadObjList(List<GameObject> obstacleL, List<GameObject> allowedObjectsL, List<PushAbleGameObj> pushAbleL)
     {
         obstacleList.Clear();
         pushAbleList.Clear();
+        allowedObjectsL.Clear();
 
+        allowedObjectsWhenSmall = allowedObjectsL;
         obstacleList = obstacleL;
         pushAbleList = pushAbleL;
     }
@@ -97,6 +101,11 @@ public class PlayerMovement : Controller
     {
         count--;
 
+        if (count <= 0)
+        {
+            count = 0;
+        }
+
         if (Mathf.Abs(direction.x) > 0.1f)
         {
             spr.flipX = direction.x < 0;
@@ -110,22 +119,23 @@ public class PlayerMovement : Controller
         {
             direction.y = 0;
         }
-        
+
         direction.Normalize();
 
         if (Blocked(transform.position, direction))
         {
+            if (count == 0)
+            {
+                PuffedDown();
+            }
+
             return false;
         }
         else
         {
             transform.Translate(direction);
 
-            if (count < 0)
-            {
-                count = 0;
-            }
-            else if (count == 0)
+            if (count == 0)
             {
                 PuffedDown();
             }
@@ -138,11 +148,16 @@ public class PlayerMovement : Controller
     public override bool Blocked(Vector3 position, Vector2 direction)
     {
         Vector2 newPos = new Vector2(position.x, position.y) + direction * distancePerGrid;
-        
+
         foreach (var obj in obstacleList)
         {
             if (obj.transform.position.x == newPos.x && obj.transform.position.y == newPos.y)
             {
+                if (!usePushAbleObjects && allowedObjectsWhenSmall.Contains(obj))
+                {
+                    continue; // 0 bị chặn
+                }
+
                 return true;
             }
         }
@@ -168,22 +183,32 @@ public class PlayerMovement : Controller
         return false;
     }
 
+    private IEnumerator IEEatStar(Star star)
+    {
+        star.Eat();
+        UIManager.Ins.CloseUI<MainCanvas>();
+        yield return new WaitForSeconds(1.5f);
+        LevelManager.Ins.isWin = true;
+        UIManager.Ins.OpenUI<WinCanvas>();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        localCoral = Cache.GetCoral(other);
-        if (localCoral != null)
+        Coral detectedCoral = Cache.GetCoral(other);
+        if (detectedCoral != null)
         {
+            if (localCoral == null)
+            {
+                localCoral = detectedCoral;
+            }
             PuffedUp();
             localCoral.DeActiveBox();
         }
 
-        /*
-         WinBox box = Cache.GetWinBox(other);
-         if (box != null)
-         {
-             LevelManager.Ins.isWin = true;
-             UIManager.Ins.CloseUI<MainCanvas>();
-             UIManager.Ins.OpenUI<WinCanvas>();
-         }*/
+        Star star = Cache.GetStar(other);
+        if (star != null)
+        {
+            StartCoroutine(IEEatStar(star));
+        }
     }
 }

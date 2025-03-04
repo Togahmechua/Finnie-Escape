@@ -46,6 +46,7 @@ public class WinCanvas : UICanvas
             {
                 // Reached the last level
                 Debug.Log("All levels completed!");
+                LevelManager.Ins.DespawnMap();
                 UIManager.Ins.CloseUI<WinCanvas>();
                 UIManager.Ins.CloseUI<MainCanvas>();
                 UIManager.Ins.OpenUI<ChooseLevelCanvas>();
