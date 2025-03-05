@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class Crab : MonoBehaviour
 {
-    [SerializeField] private Transform t;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        LarnternFish fish = Cache.GetLarnternFish(collision);
+        if (fish != null)
+        {
+            Debug.Log("Ded");
+            fish.Die();
+        }
+    }
 }

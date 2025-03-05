@@ -256,10 +256,14 @@ public class PlayerMovement : Controller
         Coral detectedCoral = Cache.GetCoral(other);
         if (detectedCoral != null)
         {
-            if (localCoral == null)
+            // Nếu đã có coral trước đó, active lại nó trước khi thay đổi
+            if (localCoral != null)
             {
-                localCoral = detectedCoral;
+                localCoral.ActiveBox();
             }
+
+            // Gán coral mới
+            localCoral = detectedCoral;
             PuffedUp();
             localCoral.DeActiveBox();
         }
@@ -270,7 +274,7 @@ public class PlayerMovement : Controller
             star.Eat();
         }
 
-        LarnternFish enemy = Cache.GetEnemy(other);
+        LarnternFish enemy = Cache.GetLarnternFish(other);
         if (enemy != null)
         {
             StartCoroutine(IEDead());

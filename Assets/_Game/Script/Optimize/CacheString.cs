@@ -10,4 +10,5 @@ public class CacheString : MonoBehaviour
     public static string TAG_DEAD = "DiedFish";
     public static string TAG_STUN = "LarnternFishScared";
     public static string TAG_IDLEFISH = "LarternFishIdle";
+    public static string TAG_DIELFISH = "DieLFish";
 }

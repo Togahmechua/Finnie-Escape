@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class PushAbleGameObj : Controller
 {
+    [SerializeField] private EEnemy enemyType;
+
     private List<GameObject> obstacleList = new List<GameObject>();
-    [SerializeField] private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
+    private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
     private bool isFalling = false;
     private float fallDelay = 0.15f; // Thời gian giữa mỗi lần rơi
-    public bool canFall = false; // Biến kiểm soát có rơi hay không
 
     void Start()
     {
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.AllowedObjList(), LevelManager.Ins.level.PushAbleGameObjList());
-        StartCoroutine(FallLoop());
+        
+        switch (enemyType)
+        {
+            case EEnemy.Crab:
+                StartCoroutine(FallLoop());
+                break;
+            case EEnemy.Octopus:
+                //Ko rơi
+                break;  
+        }
     }
 
     private IEnumerator FallLoop()
@@ -124,4 +134,10 @@ public class PushAbleGameObj : Controller
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, Vector3.down * 0.6f);
     }
+}
+
+public enum EEnemy
+{
+    Crab,
+    Octopus
 }

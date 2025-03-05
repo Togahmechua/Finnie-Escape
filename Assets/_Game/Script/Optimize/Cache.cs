@@ -43,7 +43,7 @@ public class Cache
 
     private static Dictionary<Collider2D, LarnternFish> enemy = new Dictionary<Collider2D, LarnternFish>();
 
-    public static LarnternFish GetEnemy(Collider2D collider)
+    public static LarnternFish GetLarnternFish(Collider2D collider)
     {
         if (!enemy.ContainsKey(collider))
         {

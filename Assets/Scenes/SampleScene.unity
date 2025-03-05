@@ -259,6 +259,8 @@ MonoBehaviour:
   - {fileID: 8614887618607199100, guid: 2bed90600700e5249a157a067b3c4636, type: 3}
   - {fileID: 6042226949694214376, guid: fea6e454aa10c4e438307d2b42da6808, type: 3}
   - {fileID: 8843269599225809457, guid: 232bc9efca1582f4d8afb702764c305e, type: 3}
+  - {fileID: 502185491580484086, guid: fa4f4ac74076b124ba7c8e4dfee7c5a7, type: 3}
+  - {fileID: 8891157377259872638, guid: 932f67502ec2c7e47bdd55cdb034d685, type: 3}
   curMap: 0
   isWin: 0
   curMapID: 0

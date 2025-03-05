@@ -29,6 +29,23 @@ public class LarnternFish : MonoBehaviour
         anim.Play(CacheString.TAG_STUN);
     }
 
+    public void Die()
+    {
+        anim.Play(CacheString.TAG_DIELFISH);
+        StartCoroutine(RemoveAfterDeath());
+    }
+
+    private IEnumerator RemoveAfterDeath()
+    {
+        if (LevelManager.Ins.level.EnemyList().Contains(this))
+        {
+            LevelManager.Ins.level.EnemyList().Remove(this);
+        }
+
+        yield return new WaitForSeconds(1.2f);
+
+        Destroy(gameObject);
+    }
     public void Move()
     {
         anim.Play(CacheString.TAG_IDLEFISH);
