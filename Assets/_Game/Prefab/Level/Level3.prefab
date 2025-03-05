@@ -79,6 +79,37 @@ Transform:
   - {fileID: 685038321538795656}
   m_Father: {fileID: 8710119543438511323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2084286701312295088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350787902960862173}
+  m_Layer: 0
+  m_Name: LanternFishHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &350787902960862173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084286701312295088}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8710119543438511323}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4154654232424230457
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +215,7 @@ Transform:
   - {fileID: 1527954287597021515}
   - {fileID: 7838930421808882303}
   - {fileID: 5605078386428014545}
+  - {fileID: 350787902960862173}
   - {fileID: 3702434240291304688}
   - {fileID: 2564023215687730585}
   m_Father: {fileID: 0}
@@ -207,7 +239,9 @@ MonoBehaviour:
   allowedHolder: {fileID: 3867949147659509753}
   pushAbleHolder: {fileID: 1527954287597021515}
   gateHolder: {fileID: 5605078386428014545}
+  enemyHolder: {fileID: 350787902960862173}
   gateList: []
+  enemyList: []
 --- !u!1 &6530687846980790261
 GameObject:
   m_ObjectHideFlags: 0

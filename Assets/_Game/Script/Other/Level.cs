@@ -14,11 +14,13 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform allowedHolder;
     [SerializeField] private Transform pushAbleHolder;
     [SerializeField] private Transform gateHolder;
+    [SerializeField] private Transform enemyHolder;
 
     private List<GameObject> obstacleList = new List<GameObject>();
     private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
     [HideInInspector] public List<Gate> gateList = new List<Gate>();
+    [HideInInspector] public List<LarnternFish> enemyList = new List<LarnternFish>();
 
     private void Start()
     {
@@ -56,10 +58,14 @@ public class Level : MonoBehaviour
     {
         return pushAbleList;
     }
-
     public List<Gate> GateList()
     {
         return gateList;
+    }
+
+    public List<LarnternFish> EnemyList()
+    {
+        return enemyList;
     }
 
     private void SetCurMap()
@@ -81,6 +87,8 @@ public class Level : MonoBehaviour
         obstacleList.Clear();
         allowedObjectsWhenSmall.Clear();
         pushAbleList.Clear();
+        gateList.Clear();
+        enemyList.Clear();
         
         for (int i = 0; i < obstacleHolder.childCount; i++)
         {
@@ -117,6 +125,15 @@ public class Level : MonoBehaviour
             if (gate != null)
             {
                 gateList.Add(gate);
+            }
+        }
+
+        for (int i = 0; i < enemyHolder.childCount; i++)
+        {
+            LarnternFish enemy = enemyHolder.GetChild(i).GetComponent<LarnternFish>();
+            if (enemy != null)
+            {
+                enemyList.Add(enemy);
             }
         }
     }

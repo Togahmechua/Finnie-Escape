@@ -25,6 +25,7 @@ public class PlayerMovement : Controller
     private int count;
 
     private Coral localCoral;
+    
 
     void Start()
     {
@@ -39,13 +40,13 @@ public class PlayerMovement : Controller
 
     void Update()
     {
+        if (isDed || LevelManager.Ins.isWin)
+            return;
+
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         moveInput.Normalize();
 
         Vector2 newMoveInput = moveInput * new Vector2(distancePerGrid, distancePerGrid);
-
-        if (isDed)
-            return;
 
         if (newMoveInput.sqrMagnitude > 0.5)
         {
@@ -101,6 +102,14 @@ public class PlayerMovement : Controller
         {
             bb[i].SetActive(true);
         }
+
+        if (usePushAbleObjects)
+        {
+            foreach (LarnternFish enemy in LevelManager.Ins.level.EnemyList())
+            {
+                enemy.Stun();
+            }
+        }
     }
 
     private void PuffedDown()
@@ -155,6 +164,8 @@ public class PlayerMovement : Controller
             {
                 PuffedDown();
             }
+
+            StartCoroutine(DelayedEnemyMove());
 
             return true;
         }
@@ -217,6 +228,20 @@ public class PlayerMovement : Controller
         return false;
     }
 
+    private IEnumerator DelayedEnemyMove()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        if (!usePushAbleObjects)
+        {
+            foreach (LarnternFish enemy in LevelManager.Ins.level.EnemyList())
+            {
+                enemy.Move();
+            }
+        }
+    }
+
+
     private IEnumerator IEDead()
     {
         anim.Play(CacheString.TAG_DEAD);
@@ -245,8 +270,14 @@ public class PlayerMovement : Controller
             star.Eat();
         }
 
-        Enemy enemy = Cache.GetEnemy(other);
+        LarnternFish enemy = Cache.GetEnemy(other);
         if (enemy != null)
+        {
+            StartCoroutine(IEDead());
+        }
+
+        Crab crab = Cache.GetCrab(other);
+        if (crab != null)
         {
             StartCoroutine(IEDead());
         }

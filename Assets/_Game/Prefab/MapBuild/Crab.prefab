@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 6033568421601745560}
   - component: {fileID: 4691336055208406519}
   - component: {fileID: 4608209772785867022}
-  - component: {fileID: 7124371155469726430}
+  - component: {fileID: 777074994037818316}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Untagged
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowedObjectsWhenSmall: []
+  canFall: 0
 --- !u!61 &4691336055208406519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -227,7 +228,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7124371155469726430
+--- !u!114 &777074994037818316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,6 +237,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8194644009620512057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ca6908002463854b8f74786ac7591e4, type: 3}
+  m_Script: {fileID: 11500000, guid: a222626d1626d0244a81acb1a8563179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

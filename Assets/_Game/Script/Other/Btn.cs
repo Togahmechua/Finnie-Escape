@@ -7,7 +7,7 @@ public class Btn : MonoBehaviour
     [SerializeField] private Gate targetGate;
     [SerializeField] private SpriteRenderer spr;
     [SerializeField] private Sprite[] sprImg;
-    
+
     public void CloseGate()
     {
         spr.sprite = sprImg[1];
@@ -28,7 +28,7 @@ public class Btn : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = Cache.GetEnemy(collision);
+        Crab enemy = Cache.GetCrab(collision);
         if (enemy != null)
         {
             OpenGate();
@@ -37,7 +37,7 @@ public class Btn : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Enemy enemy = Cache.GetEnemy(collision);
+        Crab enemy = Cache.GetCrab(collision);
         if (enemy != null)
         {
             CloseGate();

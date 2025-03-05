@@ -41,16 +41,28 @@ public class Cache
     }
 
 
-    private static Dictionary<Collider2D, Enemy> enemy = new Dictionary<Collider2D, Enemy>();
+    private static Dictionary<Collider2D, LarnternFish> enemy = new Dictionary<Collider2D, LarnternFish>();
 
-    public static Enemy GetEnemy(Collider2D collider)
+    public static LarnternFish GetEnemy(Collider2D collider)
     {
         if (!enemy.ContainsKey(collider))
         {
-            enemy.Add(collider, collider.GetComponent<Enemy>());
+            enemy.Add(collider, collider.GetComponent<LarnternFish>());
         }
 
         return enemy[collider];
+    }
+
+    private static Dictionary<Collider2D, Crab> crab = new Dictionary<Collider2D, Crab>();
+
+    public static Crab GetCrab(Collider2D collider)
+    {
+        if (!crab.ContainsKey(collider))
+        {
+            crab.Add(collider, collider.GetComponent<Crab>());
+        }
+
+        return crab[collider];
     }
 
     private static Dictionary<Collider2D, PlayerMovement> player = new Dictionary<Collider2D, PlayerMovement>();
