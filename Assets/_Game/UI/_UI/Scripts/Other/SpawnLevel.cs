@@ -42,10 +42,7 @@ public class SpawnLevel : MonoBehaviour
             {
                 levelBtn.img.sprite = levelBtn.spr[1];
 
-                levelBtn.txt.text = levelBtn.id < 9
-                ? "0" + (levelBtn.id + 1).ToString()
-                : (levelBtn.id + 1).ToString();
-
+               
                 levelBtn.btn.interactable = true;
                 levelBtn.PlayAnim();
             }
@@ -55,6 +52,11 @@ public class SpawnLevel : MonoBehaviour
                 levelBtn.txt.text = "";
                 levelBtn.btn.interactable = false;
             }
+
+            levelBtn.txt.text = levelBtn.id < 9
+               ? "0" + (levelBtn.id + 1).ToString()
+               : (levelBtn.id + 1).ToString();
+
         }
     }
 

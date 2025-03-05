@@ -6,24 +6,34 @@ using UnityEngine;
 public class PlayerMovement : Controller
 {
     public float distancePerGrid = 1f;
+    public bool isDed;
 
     [Header("-----Components-----")]
     [SerializeField] private SpriteRenderer spr;
     [SerializeField] private Sprite[] sprFish;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform bubbleHolder;
 
     [Header("-----List-----")]
     [SerializeField] private List<GameObject> obstacleList = new List<GameObject>();
     [SerializeField] private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     [SerializeField] private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
 
+    private GameObject[] bb = new GameObject[5];
     private bool isReadyToMove = true;
     private bool usePushAbleObjects;
-    public int count;
+    private int count;
 
-    [SerializeField] private Coral localCoral;
+    private Coral localCoral;
 
     void Start()
     {
+        for (int i = 0; i < bubbleHolder.childCount; i++)
+        {
+            bb[i] = bubbleHolder.GetChild(i).gameObject;
+            bb[i].SetActive(false);
+        }
+
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.AllowedObjList(), LevelManager.Ins.level.PushAbleGameObjList());
     }
 
@@ -33,6 +43,9 @@ public class PlayerMovement : Controller
         moveInput.Normalize();
 
         Vector2 newMoveInput = moveInput * new Vector2(distancePerGrid, distancePerGrid);
+
+        if (isDed)
+            return;
 
         if (newMoveInput.sqrMagnitude > 0.5)
         {
@@ -70,7 +83,7 @@ public class PlayerMovement : Controller
     {
         obstacleList.Clear();
         pushAbleList.Clear();
-        allowedObjectsL.Clear();
+        allowedObjectsWhenSmall.Clear();
 
         allowedObjectsWhenSmall = allowedObjectsL;
         obstacleList = obstacleL;
@@ -83,6 +96,11 @@ public class PlayerMovement : Controller
         spr.sprite = sprFish[1];
         usePushAbleObjects = true;
         count = 5;
+
+        for (int i = 0; i < bb.Length; i++)
+        {
+            bb[i].SetActive(true);
+        }
     }
 
     private void PuffedDown()
@@ -99,13 +117,6 @@ public class PlayerMovement : Controller
 
     public override bool Move(Vector2 direction)
     {
-        count--;
-
-        if (count <= 0)
-        {
-            count = 0;
-        }
-
         if (Mathf.Abs(direction.x) > 0.1f)
         {
             spr.flipX = direction.x < 0;
@@ -124,18 +135,23 @@ public class PlayerMovement : Controller
 
         if (Blocked(transform.position, direction))
         {
-            if (count == 0)
-            {
-                PuffedDown();
-            }
-
             return false;
         }
         else
         {
             transform.Translate(direction);
 
-            if (count == 0)
+            // Sau khi di chuyển mới xử lý phồng / xẹp
+            if (count > 0)
+            {
+                count--;
+                if (count < bb.Length)
+                {
+                    bb[count].SetActive(false); // Tắt dần từng bubble
+                }
+            }
+
+            if (count <= 0)
             {
                 PuffedDown();
             }
@@ -143,7 +159,6 @@ public class PlayerMovement : Controller
             return true;
         }
     }
-
 
     public override bool Blocked(Vector3 position, Vector2 direction)
     {
@@ -153,12 +168,31 @@ public class PlayerMovement : Controller
         {
             if (obj.transform.position.x == newPos.x && obj.transform.position.y == newPos.y)
             {
-                if (!usePushAbleObjects && allowedObjectsWhenSmall.Contains(obj))
+                return true;
+            }
+        }
+
+        foreach (var allowedObj  in allowedObjectsWhenSmall)
+        {
+            if (allowedObj.transform.position.x == newPos.x && allowedObj.transform.position.y == newPos.y)
+            {
+                if (!usePushAbleObjects && allowedObjectsWhenSmall.Contains(allowedObj))
                 {
                     continue; // 0 bị chặn
                 }
 
                 return true;
+            }
+        }
+
+        foreach (var gate in LevelManager.Ins.level.GateList())
+        {
+            if (gate.transform.position.x == newPos.x && gate.transform.position.y == newPos.y)
+            {
+                if (gate.IsBlocked())
+                {
+                    return true;
+                }
             }
         }
 
@@ -183,13 +217,13 @@ public class PlayerMovement : Controller
         return false;
     }
 
-    private IEnumerator IEEatStar(Star star)
+    private IEnumerator IEDead()
     {
-        star.Eat();
+        anim.Play(CacheString.TAG_DEAD);
+        isDed = true;
         UIManager.Ins.CloseUI<MainCanvas>();
-        yield return new WaitForSeconds(1.5f);
-        LevelManager.Ins.isWin = true;
-        UIManager.Ins.OpenUI<WinCanvas>();
+        yield return new WaitForSeconds(1.2f);
+        UIManager.Ins.OpenUI<LooseCanvas>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -208,7 +242,28 @@ public class PlayerMovement : Controller
         Star star = Cache.GetStar(other);
         if (star != null)
         {
-            StartCoroutine(IEEatStar(star));
+            star.Eat();
+        }
+
+        Enemy enemy = Cache.GetEnemy(other);
+        if (enemy != null)
+        {
+            StartCoroutine(IEDead());
+        }
+
+        Btn btn = Cache.GetBtn(other);
+        if (btn != null)
+        {
+            btn.OpenGate();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Btn btn = Cache.GetBtn(collision);
+        if (btn != null)
+        {
+            btn.CloseGate();
         }
     }
 }

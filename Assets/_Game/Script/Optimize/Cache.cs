@@ -28,6 +28,31 @@ public class Cache
         return star[collider];
     }
 
+    private static Dictionary<Collider2D, Btn> btn = new Dictionary<Collider2D, Btn>();
+
+    public static Btn GetBtn(Collider2D collider)
+    {
+        if (!btn.ContainsKey(collider))
+        {
+            btn.Add(collider, collider.GetComponent<Btn>());
+        }
+
+        return btn[collider];
+    }
+
+
+    private static Dictionary<Collider2D, Enemy> enemy = new Dictionary<Collider2D, Enemy>();
+
+    public static Enemy GetEnemy(Collider2D collider)
+    {
+        if (!enemy.ContainsKey(collider))
+        {
+            enemy.Add(collider, collider.GetComponent<Enemy>());
+        }
+
+        return enemy[collider];
+    }
+
     private static Dictionary<Collider2D, PlayerMovement> player = new Dictionary<Collider2D, PlayerMovement>();
 
     public static PlayerMovement GetPlayerMovement(Collider2D collider)

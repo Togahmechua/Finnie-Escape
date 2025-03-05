@@ -47,5 +47,8 @@ public enum ELevel
     Level10 = 10,
     Level11 = 11,
     Level12 = 12,
-    Level13 = 13
+    Level13 = 13,
+    Level14 = 14,
+    Level15 = 15,
+    Level16 = 16
 }

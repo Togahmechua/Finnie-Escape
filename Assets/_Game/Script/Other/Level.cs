@@ -13,12 +13,14 @@ public class Level : MonoBehaviour
     [SerializeField] private Transform obstacleHolder;
     [SerializeField] private Transform allowedHolder;
     [SerializeField] private Transform pushAbleHolder;
+    [SerializeField] private Transform gateHolder;
 
     private List<GameObject> obstacleList = new List<GameObject>();
-    [SerializeField] private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
+    private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();
     private List<PushAbleGameObj> pushAbleList = new List<PushAbleGameObj>();
+    [HideInInspector] public List<Gate> gateList = new List<Gate>();
 
-    private void Awake()
+    private void Start()
     {
         LoadList();
     }
@@ -53,6 +55,11 @@ public class Level : MonoBehaviour
     public List<PushAbleGameObj> PushAbleGameObjList()
     {
         return pushAbleList;
+    }
+
+    public List<Gate> GateList()
+    {
+        return gateList;
     }
 
     private void SetCurMap()
@@ -93,7 +100,7 @@ public class Level : MonoBehaviour
             }
         }
         // In ra số lượng đối tượng trong danh sách để kiểm tra
-        Debug.Log("allowedObjectsWhenSmall count: " + allowedObjectsWhenSmall.Count);
+        //Debug.Log("allowedObjectsWhenSmall count: " + allowedObjectsWhenSmall.Count);
 
         for (int i = 0; i < pushAbleHolder.childCount; i++)
         {
@@ -101,6 +108,15 @@ public class Level : MonoBehaviour
             if (push != null)
             {
                 pushAbleList.Add(push);
+            }
+        }
+
+        for (int i = 0; i < gateHolder.childCount; i++)
+        {
+            Gate gate = gateHolder.GetChild(i).GetComponent<Gate>();
+            if (gate != null)
+            {
+                gateList.Add(gate);
             }
         }
     }

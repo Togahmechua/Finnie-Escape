@@ -71,9 +71,11 @@ public class PushAbleGameObj : Controller
     {
         obstacleList.Clear();
         pushAbleList.Clear();
+        allowedObjectsWhenSmall.Clear();
 
-        obstacleList = new List<GameObject>(obstacleL);
-        pushAbleList = new List<PushAbleGameObj>(pushAbleL);
+        allowedObjectsWhenSmall = allowedObjectsL;
+        obstacleList = obstacleL;
+        pushAbleList = pushAbleL;
     }
 
     public override bool Move(Vector2 direction)

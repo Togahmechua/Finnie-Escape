@@ -12,4 +12,10 @@ public class Star : MonoBehaviour
         anim.Play(CacheString.TAG_EATSTAR);
         box.enabled = false;
     }
+
+    //Animation Event
+    public void WaitParticleEff()
+    {
+        Destroy(this.gameObject);
+    }
 }
