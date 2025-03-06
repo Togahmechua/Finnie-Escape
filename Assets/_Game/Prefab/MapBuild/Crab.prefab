@@ -154,8 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4db94e30cbb69488a554b1033df2b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowedObjectsWhenSmall: []
-  canFall: 0
+  enemyType: 0
 --- !u!61 &4691336055208406519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -240,3 +239,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a222626d1626d0244a81acb1a8563179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: {fileID: 6033568421601745560}

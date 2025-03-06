@@ -38,7 +38,7 @@ public class PlayerMovement : Controller
         LoadObjList(LevelManager.Ins.level.GameObjList(), LevelManager.Ins.level.AllowedObjList(), LevelManager.Ins.level.PushAbleGameObjList());
     }
 
-    void Update()
+/*    void Update()
     {
         if (isDed || LevelManager.Ins.isWin)
             return;
@@ -61,9 +61,12 @@ public class PlayerMovement : Controller
             isReadyToMove = true;
         }
     }
-
-    /*public void OnMoveButton(Vector2 direction)
+*/
+    public void OnMoveButton(Vector2 direction)
     {
+        if (isDed || LevelManager.Ins.isWin)
+            return;
+
         if (isReadyToMove)
         {
             isReadyToMove = false;
@@ -72,7 +75,7 @@ public class PlayerMovement : Controller
             // Delay nhỏ để tránh spam liên tục
             StartCoroutine(ResetMoveCooldown());
         }
-    }*/
+    }
 
     private IEnumerator ResetMoveCooldown()
     {
@@ -93,6 +96,7 @@ public class PlayerMovement : Controller
 
     private void PuffedUp()
     {
+        AudioManager.Ins.PlaySFX(AudioManager.Ins.eatBubble);
         //Puffed-Up
         spr.sprite = sprFish[1];
         usePushAbleObjects = true;
@@ -272,6 +276,7 @@ public class PlayerMovement : Controller
         if (star != null)
         {
             star.Eat();
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.collect);
         }
 
         LarnternFish enemy = Cache.GetLarnternFish(other);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PushAbleGameObj : Controller
 {
-    [SerializeField] private EEnemy enemyType;
+    public EEnemy enemyType;
 
     private List<GameObject> obstacleList = new List<GameObject>();
     private List<GameObject> allowedObjectsWhenSmall = new List<GameObject>();

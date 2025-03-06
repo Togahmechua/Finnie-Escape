@@ -29,7 +29,7 @@ public class Btn : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Crab enemy = Cache.GetCrab(collision);
-        if (enemy != null)
+        if (enemy != null && enemy.enemyType.enemyType == EEnemy.Crab)
         {
             OpenGate();
         }
@@ -38,7 +38,7 @@ public class Btn : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Crab enemy = Cache.GetCrab(collision);
-        if (enemy != null)
+        if (enemy != null && enemy.enemyType.enemyType == EEnemy.Crab)
         {
             CloseGate();
         }

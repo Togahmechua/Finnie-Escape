@@ -12,6 +12,10 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip backgroundClip;
     public AudioClip click;
     public AudioClip win;
+    public AudioClip loose;
+    public AudioClip collect;
+    public AudioClip eatBubble;
+    public AudioClip clickMoveBtn;
 
     private void Start()
     {
@@ -35,6 +39,6 @@ public class AudioManager : Singleton<AudioManager>
     {
         //this.enabled = true;
         sfxSource.volume = 1f;
-        musicSource.volume = 0.7f;
+        musicSource.volume = 0.5f;
     }
 }

@@ -21,7 +21,7 @@ public class LevelBtn : MonoBehaviour
 
     private void LoadLevel()
     {
-        //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+        AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
         LevelManager.Ins.LoadMapByID(id);
         UIManager.Ins.OpenUI<MainCanvas>();
         UIManager.Ins.CloseUI<ChooseLevelCanvas>();
@@ -29,6 +29,6 @@ public class LevelBtn : MonoBehaviour
 
     public void PlayAnim()
     {
-        //anim.Play(CacheString.TAG_LVBTN);
+        anim.Play(CacheString.TAG_LVBTN);
     }
 }

@@ -31,14 +31,14 @@ public class PauseCanvas : UICanvas
     {
         continueBtn.onClick.AddListener(() =>
         {
-            //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
             UIManager.Ins.CloseUI<PauseCanvas>();
             UIManager.Ins.OpenUI<MainCanvas>();
         });
 
         menuBtn.onClick.AddListener(() =>
         {
-            //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
 
             LevelManager.Ins.DespawnMap();
             UIManager.Ins.CloseUI<PauseCanvas>();
@@ -55,19 +55,19 @@ public class PauseCanvas : UICanvas
 
         soundBtn.onClick.AddListener(() =>
         {
-            //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
 
             isClick = !isClick;
             soundBtn.image.sprite = spr[isClick ? 1 : 0];
 
-            /*if (isClick)
+            if (isClick)
             {
                 AudioManager.Ins.TurnOff();
             }
             else
             {
                 AudioManager.Ins.TurnOn();
-            }*/
+            }
         });
     }
 }

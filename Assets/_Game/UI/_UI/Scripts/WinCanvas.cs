@@ -18,7 +18,7 @@ public class WinCanvas : UICanvas
 
     private void OnEnable()
     {
-        //AudioManager.Ins.PlaySFX(AudioManager.Ins.win);
+        AudioManager.Ins.PlaySFX(AudioManager.Ins.win);
         Time.timeScale = 0f;
     }
 
@@ -32,7 +32,7 @@ public class WinCanvas : UICanvas
     {
         nextBtn.onClick.AddListener(() =>
         {
-            //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
             LevelManager.Ins.curMapID++;
 
             if (LevelManager.Ins.curMapID <= LevelManager.Ins.levelList.Count - 1)
@@ -55,7 +55,7 @@ public class WinCanvas : UICanvas
 
         menuBtn.onClick.AddListener(() =>
         {
-            //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
 
             LevelManager.Ins.DespawnMap();
             UIManager.Ins.CloseUI<WinCanvas>();
@@ -72,18 +72,18 @@ public class WinCanvas : UICanvas
 
         soundBtn.onClick.AddListener(() =>
         {
-            //AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
+            AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
             isClick = !isClick;
             soundBtn.image.sprite = spr[isClick ? 1 : 0];
 
-           /* if (isClick)
+            if (isClick)
             {
                 AudioManager.Ins.TurnOff();
             }
             else
             {
                 AudioManager.Ins.TurnOn();
-            }*/
+            }
         });
     }
 }
