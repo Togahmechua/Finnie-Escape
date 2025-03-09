@@ -253,22 +253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapSO: {fileID: 11400000, guid: d1f9fec8adc1cca42b690f9136a6f21e, type: 2}
   level: {fileID: 0}
-  levelList:
-  - {fileID: 2541138738075415692, guid: 7cb8c0826d521304eaa799f77ec45fb7, type: 3}
-  - {fileID: 2082652244649237948, guid: 4b8b0dee88d6fda499096691f7b8cebb, type: 3}
-  - {fileID: 7015250375284936494, guid: a5542674948cfc44698a567bb9544f7a, type: 3}
-  - {fileID: 8614887618607199100, guid: 2bed90600700e5249a157a067b3c4636, type: 3}
-  - {fileID: 6042226949694214376, guid: fea6e454aa10c4e438307d2b42da6808, type: 3}
-  - {fileID: 8843269599225809457, guid: 232bc9efca1582f4d8afb702764c305e, type: 3}
-  - {fileID: 502185491580484086, guid: fa4f4ac74076b124ba7c8e4dfee7c5a7, type: 3}
-  - {fileID: 8891157377259872638, guid: 932f67502ec2c7e47bdd55cdb034d685, type: 3}
-  - {fileID: 6799245690669370913, guid: 243edabac3d1f444f8bfa85f92aca65e, type: 3}
-  - {fileID: 3485313946847163076, guid: 5455f6bd234914e45834d9e48ba907f9, type: 3}
-  - {fileID: 4423762100380498835, guid: 80efb422ebdb9f0458d5657577efa5ad, type: 3}
-  - {fileID: 4263698240071075824, guid: 294c91d9dda7a5e488ae652ebcad5c68, type: 3}
-  - {fileID: 5599699132160953752, guid: f953edbc820910d4e9667710f9345f24, type: 3}
-  - {fileID: 724374677964312939, guid: c7631b9a551344d4d933f6f6901b2b5c, type: 3}
-  - {fileID: 2600707043648498051, guid: b7a91a907035e664d865e31d44bcab58, type: 3}
   curMap: 0
   isWin: 0
   curMapID: 0

@@ -13,35 +13,108 @@ MonoBehaviour:
   m_Name: MapSO
   m_EditorClassIdentifier: 
   mapList:
-  - eLevel: 1
+  - levelID: 0
+    levelPrefab:
+      m_AssetGUID: 7cb8c0826d521304eaa799f77ec45fb7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 2
+  - levelID: 1
+    levelPrefab:
+      m_AssetGUID: 4b8b0dee88d6fda499096691f7b8cebb
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
     isWon: 1
-  - eLevel: 3
+  - levelID: 2
+    levelPrefab:
+      m_AssetGUID: a5542674948cfc44698a567bb9544f7a
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
     isWon: 1
-  - eLevel: 4
+  - levelID: 3
+    levelPrefab:
+      m_AssetGUID: 2bed90600700e5249a157a067b3c4636
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
     isWon: 1
-  - eLevel: 5
+  - levelID: 4
+    levelPrefab:
+      m_AssetGUID: fea6e454aa10c4e438307d2b42da6808
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 6
+  - levelID: 5
+    levelPrefab:
+      m_AssetGUID: 232bc9efca1582f4d8afb702764c305e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 7
+  - levelID: 6
+    levelPrefab:
+      m_AssetGUID: fa4f4ac74076b124ba7c8e4dfee7c5a7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 8
+  - levelID: 7
+    levelPrefab:
+      m_AssetGUID: 932f67502ec2c7e47bdd55cdb034d685
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 9
+  - levelID: 8
+    levelPrefab:
+      m_AssetGUID: 243edabac3d1f444f8bfa85f92aca65e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 10
+  - levelID: 9
+    levelPrefab:
+      m_AssetGUID: 5455f6bd234914e45834d9e48ba907f9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 11
+  - levelID: 10
+    levelPrefab:
+      m_AssetGUID: 80efb422ebdb9f0458d5657577efa5ad
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 12
+  - levelID: 11
+    levelPrefab:
+      m_AssetGUID: 294c91d9dda7a5e488ae652ebcad5c68
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 13
+  - levelID: 12
+    levelPrefab:
+      m_AssetGUID: f953edbc820910d4e9667710f9345f24
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 14
+  - levelID: 13
+    levelPrefab:
+      m_AssetGUID: c7631b9a551344d4d933f6f6901b2b5c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 15
+  - levelID: 14
+    levelPrefab:
+      m_AssetGUID: b7a91a907035e664d865e31d44bcab58
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
     isWon: 1
-  - eLevel: 16
-    isWon: 0

@@ -1,20 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Threading.Tasks;
+using System;
 
 public class LevelManager : Singleton<LevelManager>
 {
     public MapSO mapSO;
     [HideInInspector] public Level level;
-    public List<Level> levelList = new List<Level>();
     public int curMap;
     public bool isWin;
     public int curMapID;
 
-    private List<Level> curLevelList = new List<Level>();
+    private List<AsyncOperationHandle<GameObject>> loadedLevels = new List<AsyncOperationHandle<GameObject>>();
 
     private void Start()
     {
@@ -31,13 +30,32 @@ public class LevelManager : Singleton<LevelManager>
             DespawnMap();
         }
 
-        foreach (Level lv in levelList)
+        MapSO.MapDetails mapDetails = mapSO.mapList.Find(x => x.levelID == id);
+        if (mapDetails == null || !mapDetails.levelPrefab.RuntimeKeyIsValid())
         {
-            if (lv.id == id)
+            Debug.LogError("Không tìm thấy Level ID: " + id);
+            return;
+        }
+
+        var handle = mapDetails.levelPrefab.InstantiateAsync(transform);
+        handle.Completed += OnLevelLoaded;
+
+        loadedLevels.Add(handle);
+    }
+
+    private void OnLevelLoaded(AsyncOperationHandle<GameObject> handle)
+    {
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            level = handle.Result.GetComponent<Level>();
+            if (level == null)
             {
-                level = Instantiate(levelList[id], transform);
-                curLevelList.Add(level);
+                Debug.LogError("Level Prefab không có component Level!");
             }
+        }
+        else
+        {
+            Debug.LogError("Load Level thất bại!");
         }
     }
 
@@ -45,14 +63,18 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (level != null)
         {
-            foreach (Level lv in curLevelList)
+            foreach (var handle in loadedLevels)
             {
-                Destroy(level.gameObject); ;
+                if (handle.IsValid())
+                {
+                    Addressables.Release(handle);
+                }
             }
-            
-            curLevelList.Clear();
+
+            loadedLevels.Clear();
             level = null;
             isWin = false;
+            Debug.Log("Đã xóa Level cũ!");
         }
     }
 }

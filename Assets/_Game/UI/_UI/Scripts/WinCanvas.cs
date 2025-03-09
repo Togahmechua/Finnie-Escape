@@ -35,7 +35,7 @@ public class WinCanvas : UICanvas
             AudioManager.Ins.PlaySFX(AudioManager.Ins.click);
             LevelManager.Ins.curMapID++;
 
-            if (LevelManager.Ins.curMapID <= LevelManager.Ins.levelList.Count - 1)
+            if (LevelManager.Ins.curMapID < LevelManager.Ins.mapSO.mapList.Count)
             {
                 // Load the next level
                 LevelManager.Ins.LoadMapByID(LevelManager.Ins.curMapID);
